@@ -1,13 +1,26 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { LocationStrategy, PlatformLocation, Location } from '@angular/common';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'newDashboard';
+export class AppComponent implements OnInit {
+
+     constructor(public location: Location) {}
+
+    ngOnInit(){
+    }
+
+    isMap(path: string){
+      var titlee = this.location.prepareExternalUrl(this.location.path());
+      titlee = titlee.slice( 1 );
+      if(path == titlee){
+        return false;
+      }
+      else {
+        return true;
+      }
+    }
 }
